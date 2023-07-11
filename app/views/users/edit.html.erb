@@ -1,2 +1,37 @@
-<h1>Users#edit</h1>
-<p>Find me in app/views/users/edit.html.erb</p>
+<div class="container">
+  <div class="row">
+    <div class="col-sm-12 col-md-8 col-lg-5 px-5 px-sm-0 mx-auto">
+      <h1>Editing Book</h1>
+      <% if @book.errors.any? %>
+          <%= @book.errors.count %> <%= 'error'.pluralize(@book.errors.count) %> prohibited this book from being saved
+          <ul>
+              <% @book.errors.full_messages.each do |message| %>
+                  <li><%= message %></li>
+              <% end %>
+          </ul>
+      <% end %>
+
+      <%= form_with model: @book do |f| %>
+
+        <div class="form-group">
+          <label for="inputName">Name</label>
+          <%= f.text_field :name, autofocus: true, id:"inputName", class: 'form-control' %>
+        </div>
+
+        <div class="form-group">
+          <label for="inputImage">Image</label>
+          <%= f.file_field :profile_image, accept: "image/*" %>
+        </div>
+
+        <div class="form-group">
+          <label for="user_introduction">Introduction</label>
+          <%= f.text_area :Introduction, id: "user_introduction", class: 'form-control' %>
+        </div>
+
+        <div class="form-group">
+          <%= f.submit "Update User", class: "btn btn-secondary" %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
