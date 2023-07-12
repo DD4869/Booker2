@@ -14,12 +14,12 @@
           </tr>
           <tr>
         	  <th>introduction</th>
-        	  <th></th>
+        	  <th><%= @user.introduction %></th>
         	</th>
         </tbody>
       </table>
       <div class="row">
-        <%= link_to user_path(current_user), class: "btn btn-outline-secondary btn-block edit_user_path" do %>
+        <%= link_to (@user == current_user) ? edit_user_path(current_user) : user_path(current_user), class: "btn btn-outline-secondary btn-block edit_user_path" do %>
           <i class="fas fa-user-cog"></i>
         <% end %>
       </div>

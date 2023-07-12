@@ -11,7 +11,7 @@
           </ul>
       <% end %>
 
-      <%= form_with model: @book do |f| %>
+      <%= form_with model: @user do |f| %>
 
         <div class="form-group">
           <label for="inputName">Name</label>
@@ -25,7 +25,7 @@
 
         <div class="form-group">
           <label for="user_introduction">Introduction</label>
-          <%= f.text_area :Introduction, id: "user_introduction", class: 'form-control' %>
+          <%= f.text_area :introduction, id: "user_introduction", class: 'form-control' %>
         </div>
 
         <div class="form-group">
