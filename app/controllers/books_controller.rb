@@ -5,13 +5,13 @@ class BooksController < ApplicationController
 
   def create
     #データを受け取り新規登録するためのインスタンス作成
-    @book = Book.new(book_params)
+    @new_book = Book.new(book_params)
     # ユーザーIDの紐付け
-    @book.user_id = current_user.id
-    if @book.save
+    @new_book.user_id = current_user.id
+    if @new_book.save
       #各idのページにリダイレクト
       flash[:notice] = "You have created a book successfully." #フラッシュメッセージ
-      redirect_to book_path(@book.id)
+      redirect_to book_path(@new_book.id)
     else
       @books = Book.all #render用にbooksリスト表示のため(indexアクションは呼び出されない)
       render :index

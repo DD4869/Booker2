@@ -19,20 +19,20 @@
       <tr>
     	  <th>introduction</th>
     	  <th>
-    	    <!--showとindexで別々のintroductionを表示する-->
+    	    <!--showとindexで別々のintroductionを表示するため-->
     	    <%= @book.present? && request.path == book_path(@book) ? @book.user.introduction : current_user.introduction %>
     	  </th>
     	</th>
     </tbody>
   </table>
   <div class="row">
-    <!--book showからユーザーeditにアクセスする場合は現在のユーザーページにアクセスされる-->
-    <% if request.path == user_path(current_user) %>
+    <!--showから自分以外のユーザーeditにアクセスする場合は現在のユーザーページにアクセスされる-->
+    <% if request.path == books_path || (@book && @book.user == current_user) %>
       <%= link_to edit_user_path(current_user), class: "btn btn-outline-secondary btn-block" do %>
         <i class="fas fa-user-cog"></i>
       <% end %>
     <% else %>
-      <%= link_to user_path(current_user), class: "btn btn-outline-secondary btn-block" do %>
+      <%= link_to edit_user_path(@book.user.id), class: "btn btn-outline-secondary btn-block" do %>
         <i class="fas fa-user-cog"></i>
       <% end %>
     <% end %>
