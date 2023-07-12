@@ -1,7 +1,15 @@
  <!--containerでコンテンツをまとめて、rowで水平に配置-->
+ <% if @new_book.errors.any? %>
+  <strong><h3><%= @new_book.errors.count %> <%= 'error'.pluralize(@new_book.errors.count) %> prohibited this book from being saved:</h3></strong>
+  <ul>
+    <% @new_book.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+    <% end %>
+  </ul>
+<% end %>
 <div class="container px-5 px-sm-0">
   <div class="row">
-    <%= render 'list', book: @book %>
+    <%= render 'list', book: @new_book %>
     <div class="col-md-8 offset-md-1">
       <h2>Books</h2>
       <table class="table table=hover table-inverse">

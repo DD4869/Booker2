@@ -2,33 +2,41 @@
 <script src="https://kit.fontawesome.com/60ee8a5e8e.js" crossorigin="anonymous"></script>
 <div class="col-md-3">
   <h2>User info</h2>
-  <%= image_tag current_user.get_profile_image(100,100) %>
+  <!--bookが存在しないとnot foundになるため、条件分岐-->
+  <% if @book.present? %>
+    <%= image_tag @book.user.get_profile_image(100,100) %>
+  <% else %>
+    <%= image_tag current_user.get_profile_image(100,100) %>
+  <% end %>
   <table class="table">
     <tbody>
       <tr></tr>
       <tr>
     	  <th>name</th>
-    	  <th><%= current_user.name %></th>
+    	  <!--bookが存在しないとnot foundになるため条件分岐-->
+    	  <th><%= @book.present? ? @book.user.name : current_user.name %></th>
       </tr>
       <tr>
     	  <th>introduction</th>
-    	  <th></th>
+    	  <th>
+    	    <!--showとindexで別々のintroductionを表示する-->
+    	    <%= @book.present? && request.path == book_path(@book) ? @book.user.introduction : current_user.introduction %>
+    	  </th>
     	</th>
     </tbody>
   </table>
   <div class="row">
-    <%= link_to edit_user_path(current_user), class: "btn btn-outline-secondary btn-block edit_user_path" do %>
-      <i class="fas fa-user-cog"></i>
+    <!--book showからユーザーeditにアクセスする場合は現在のユーザーページにアクセスされる-->
+    <% if request.path == user_path(current_user) %>
+      <%= link_to edit_user_path(current_user), class: "btn btn-outline-secondary btn-block" do %>
+        <i class="fas fa-user-cog"></i>
+      <% end %>
+    <% else %>
+      <%= link_to user_path(current_user), class: "btn btn-outline-secondary btn-block" do %>
+        <i class="fas fa-user-cog"></i>
+      <% end %>
     <% end %>
   </div>
-  <% if book.errors.any? %>
-      <%= book.errors.count %> <%= 'error'.pluralize(book.errors.count) %> prohibited this book from being saved
-      <ul>
-          <% book.errors.full_messages.each do |message| %>
-              <li><%= message %></li>
-          <% end %>
-      </ul>
-  <% end %>
   <h2 class="mt-3">New book</h2>
   <!-- form_with部分 -->
   <%= form_with model: book do |f| %>

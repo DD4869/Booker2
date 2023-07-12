@@ -28,7 +28,7 @@
             <ul class="navbar-nav ml-auto">
               <% if user_signed_in? %>
                 <li>
-                  <%= link_to root_path, class: "nav-link text-light" do %>
+                  <%= link_to current_user, class: "nav-link text-light" do %>
                     <i class="fas fa-home"></i> Home
                   <% end %>
                 </li>
@@ -74,6 +74,14 @@
         </div>
       </nav>
     </header>
+
+    <!--フラッシュメッセージ-->
+    <% flash.each do |name, msg| %>
+      <div class="alert alert-<%= name == 'notice' ? 'success' : 'danger' %>">
+        <%= msg %>
+      </div>
+    <% end %>
+
     <main>
       <%= yield %>
     </main>

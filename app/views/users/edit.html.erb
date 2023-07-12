@@ -1,11 +1,11 @@
 <div class="container">
   <div class="row">
     <div class="col-sm-12 col-md-8 col-lg-5 px-5 px-sm-0 mx-auto">
-      <h1>Editing Book</h1>
-      <% if @book.errors.any? %>
-          <%= @book.errors.count %> <%= 'error'.pluralize(@book.errors.count) %> prohibited this book from being saved
+      <h1>User info</h1>
+      <% if @user.errors.any? %>
+          <%= @user.errors.count %> <%= 'error'.pluralize(@user.errors.count) %> prohibited this book from being saved
           <ul>
-              <% @book.errors.full_messages.each do |message| %>
+              <% @user.errors.full_messages.each do |message| %>
                   <li><%= message %></li>
               <% end %>
           </ul>
