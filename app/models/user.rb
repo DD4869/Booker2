@@ -9,8 +9,9 @@ class User < ApplicationRecord
 
   # profile_imageという名前でActiveStorageでプロフィール画像を保存
   has_one_attached :profile_image
-
   has_many :books, dependent: :destroy
+  has_many :book_comments, dependent: :destroy
+  has_many :favorites, dependent: :destroy
 
   # プロファイル画像表示のメソッド
   def get_profile_image(width, height)
